@@ -41,6 +41,11 @@ public class NodeServiceImpl implements NodeService {
                 .build()).collect(Collectors.toList());
     }
 
+    @Override
+    public String getBlock(int order){
+        return blockChain.getKernelBlocks().get(order).toString();
+    }
+
     public void saveBlockChain() throws IOException {
         for(KernelBlock block : blockChain.getKernelBlocks()){
             if(!blockRecorder.checkBlockExist(block)){

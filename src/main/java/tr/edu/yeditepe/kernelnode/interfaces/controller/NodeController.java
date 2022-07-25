@@ -10,13 +10,25 @@
 package tr.edu.yeditepe.kernelnode.interfaces.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tr.edu.yeditepe.kernelnode.interfaces.dto.StatusDto;
+import tr.edu.yeditepe.kernelnode.service.NodeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/node")
 @RequiredArgsConstructor
 public class NodeController {
 
+    private final NodeService nodeService;
+
+    @GetMapping
+    public List<StatusDto> getBlockChainStatus() {
+        return nodeService.status();
+    }
 
 }

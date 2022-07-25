@@ -19,6 +19,7 @@ public class KernelBlock {
     private long timeStamp;
     private int nonce;
     private long order;
+    private long id;
 
     public KernelBlock(String data, String previousHash, long timeStamp, long order) {
         this.data = data;

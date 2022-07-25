@@ -8,4 +8,6 @@ public interface NodeService {
 
 
     List<StatusDto> status();
+
+    String getBlock(int order);
 }
