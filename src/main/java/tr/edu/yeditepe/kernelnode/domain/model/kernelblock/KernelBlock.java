@@ -20,6 +20,8 @@ public class KernelBlock {
     private int nonce;
     private long order;
     private long id;
+    private int consent;
+    private long originalMiner;
 
     public KernelBlock(String data, String previousHash, long timeStamp, long order) {
         this.data = data;
@@ -27,6 +29,14 @@ public class KernelBlock {
         this.timeStamp = timeStamp;
         this.order = order;
         this.hash = calculateBlockHash();
+    }
+
+    public KernelBlock(String data, String previousHash, long timeStamp, long order,String hash) {
+        this.data = data;
+        this.previousHash = previousHash;
+        this.timeStamp = timeStamp;
+        this.order = order;
+        this.hash = hash;
     }
 
     public String calculateBlockHash() {

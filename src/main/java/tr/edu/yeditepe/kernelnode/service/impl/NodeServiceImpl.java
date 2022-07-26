@@ -34,6 +34,7 @@ public class NodeServiceImpl implements NodeService {
     @Override
     public List<StatusDto> status(){
         return blockChain.getKernelBlocks().stream().map(m -> StatusDto.builder()
+                .order(m.getOrder())
                 .hash(m.getHash())
                 .previousHash(m.getPreviousHash())
                 .data(m.getData())
