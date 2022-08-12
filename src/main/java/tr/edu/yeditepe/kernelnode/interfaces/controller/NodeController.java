@@ -10,10 +10,11 @@
 package tr.edu.yeditepe.kernelnode.interfaces.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.*;
+import tr.edu.yeditepe.kernelnode.domain.model.blockchain.BlockChain;
+import tr.edu.yeditepe.kernelnode.domain.model.consentchain.ConsentChain;
+import tr.edu.yeditepe.kernelnode.interfaces.dto.ConsentBlockDto;
 import tr.edu.yeditepe.kernelnode.interfaces.dto.StatusDto;
 import tr.edu.yeditepe.kernelnode.service.NodeService;
 
@@ -24,11 +25,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NodeController {
 
+    private final ConsentChain consentChain;
+    private final BlockChain blockChainChain;
     private final NodeService nodeService;
+    private final SimpMessagingTemplate webSocket;
 
     @GetMapping
     public List<StatusDto> getBlockChainStatus() {
         return nodeService.status();
+    }
+
+    @PostMapping
+    public void startMining() {
+        webSocket.convertAndSend("/topic/minerPayload", ConsentBlockDto.builder()
+                .data("KICKSTART")
+                .build());
+    }
+
+    @PatchMapping
+    public void setDiffuculty(@RequestParam Integer diffuculty) {
+        blockChainChain.setDiffuculty(diffuculty);
+    }
+
+    @DeleteMapping
+    public void cleanConcensus() {
+        consentChain.emptyConsentChain();
     }
 
 }

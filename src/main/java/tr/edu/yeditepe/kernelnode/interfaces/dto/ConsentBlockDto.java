@@ -1,14 +1,12 @@
 package tr.edu.yeditepe.kernelnode.interfaces.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConsentBlockDto {
@@ -20,6 +18,7 @@ public class ConsentBlockDto {
     private long order;
     private UUID minerId;
     private int numberOfConsents;
+    private int diffuculty;
 
     public String toString(){
         return "order: "+order+ "\ntimestamp: "+ timeStamp + "\npreviousHash: " + previousHash+ "\nhash: "+hash+ "\ndata: "+data;

@@ -11,8 +11,10 @@ import java.util.ArrayList;
 public class BlockChain {
 
     private ArrayList<KernelBlock> kernelBlocks;
+    private int diffuculty;
 
     public BlockChain(){
         kernelBlocks = new ArrayList<>();
+        diffuculty=1;
     }
 }
